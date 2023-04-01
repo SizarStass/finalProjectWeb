@@ -2,4 +2,4 @@
 $hostname = 'localhost';
 $dbUsername = 'root';
 $password = '';
-$database = 'users';
+$database = 'kidsgame';

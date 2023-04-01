@@ -1,4 +1,11 @@
 <?php
+
+error_reporting(~E_WARNING);
+ini_set('display_errors', 0);
+
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+
 function messages()
 {
     $dbMessage['ErrDBMS'] = "<p>Connection to MySQL failed!</p>";
@@ -38,26 +45,25 @@ function mySQLiError($msg)
 
 function connectToDBMS($hostname, $username, $password)
 {
-    $message = messages();
-    $connection = new mysqli($hostname, $username, $password);
-    if ($connection->connect_error) {
-        mySQLiError(mysqli_connect_error());
+    try {
+        $connection = new mysqli($hostname, $username, $password);
+        if ($connection->connect_errno) {
+            throw new Exception($connection->connect_error);
+        }
+    } catch (exception $e) {
+        mySQLiError($e->getMessage());
         return false;
-    } else {
-        return $connection;
     }
+    return $connection;
 }
 
 function connectToDb($connectionDBMS, $database)
 {
-    $flag = true;
-    try {
-        $connectionDB = mysqli_select_db($connectionDBMS, $database);
-    } catch (Exception $e) {
-        mySQLiError($connectionDBMS->error);
-        $flag = false;
-    } finally {
-        return $flag;
+    $quuery = "USE $database";
+    if (!$connectionDBMS->query($quuery)) {
+        return false;
+    } else {
+        return true;
     }
 }
 
@@ -92,15 +98,23 @@ function sqlInsertCommand()
 
 function executeSqlQuery($connection, $query)
 {
-    try {
-        //Execute the query
-        $invokeQuery = $connection->query($query);
-    } catch (Exception $e) {
-        //If data insertion to the table failed save the system error message
+
+    if (!$connection->query($query)) {
         mySQLiError($connection->error);
-        return FALSE;
+        return false;
+    } else {
+        return true;
     }
-    return $invokeQuery;
+
+    // try {
+    //     //Execute the query
+    //     $invokeQuery = $connection->query($query);
+    // } catch (Exception $e) {
+    //     //If data insertion to the table failed save the system error message
+    //     mySQLiError($connection->error);
+    //     return FALSE;
+    // }
+    // return $invokeQuery;
 }
 function displaySelectData($query)
 {
