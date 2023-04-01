@@ -85,15 +85,15 @@ if (isset($_POST['send'])) {
         $database,
     );
 
-    // insertToTable(
-    //     $hostname,
-    //     $dbUsername,
-    //     $password,
-    //     $database,
-    //     $fName,
-    //     $lName,
-    //     $userName
-    // );
+    insertToTable(
+        $hostname,
+        $dbUsername,
+        $password,
+        $database,
+        $fName,
+        $lName,
+        $userName
+    );
 }
 ?>
 

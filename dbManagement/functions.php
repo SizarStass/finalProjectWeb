@@ -91,7 +91,7 @@ function sqlInsertCommand()
     $ln = $values['lname'];
     $userName = $values['userName'];
     //Create queries
-    $sqlCode['InsertInPlayer'] = "INSERT INTO employees (firstname, lastname, userName) VALUES ('$fn', '$ln', '$userName');";
+    $sqlCode['InsertInPlayer'] = "INSERT INTO Player (fName, lName, userName) VALUES ('$fn', '$ln', '$userName');";
     //Return an array of queries
     return $sqlCode;
 }

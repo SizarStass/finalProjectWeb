@@ -11,20 +11,18 @@ function insertToTable($hn, $un, $pw, $db, $fname, $lname, $userName)
 
     //1-Connect to the DBMS
     $con = connectToDBMS($hn, $un, $pw);
+
     //If connect to the DBMS failed, display try again and error, and stop
-    if ($con === FALSE) {
+    if ($con === false) {
         echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
         die(messages()['error']['ErrDBMS'] . mySQLiError(''));
     }
 
     //If connect to the DBMS succeeds
     //2-Connect to the DB
-    else {
-        //If connect to the DB failed, display try again and error, and stop
-        if (connectToDB($con, $db) === FALSE) {
-            echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-            die(messages()['error']['ErrDB'] . mySQLiError(''));
-        }
+    if (connectToDb($con, $db) === FALSE) {
+        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
+        die(messages()['error']['CreateDB'] . mySQLiError(''));
     }
 
     //If connect to the DB succeeds
@@ -32,7 +30,6 @@ function insertToTable($hn, $un, $pw, $db, $fname, $lname, $userName)
     //If insert data to the Table failed, display try again and error, and stop
     if (executeSqlQuery($con, sqlInsertCommand()['InsertInPlayer']) === FALSE) {
         echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-        echo "im here";
         die(messages()['error']['InsertToTab'] . mySQLiError(''));
     }
 
