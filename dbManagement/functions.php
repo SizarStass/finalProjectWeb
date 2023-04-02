@@ -57,6 +57,15 @@ function connectToDBMS($hostname, $username, $password)
     return $connection;
 }
 
+function verfiyConnectionToDBMS($con)
+{
+    //If connect to the DBMS failed, display try again and error, and stop
+    if ($con === false) {
+        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
+        die(messages()['error']['ErrDBMS'] . mySQLiError(''));
+    }
+}
+
 function connectToDb($connectionDBMS, $database)
 {
     $quuery = "USE $database";
@@ -64,6 +73,14 @@ function connectToDb($connectionDBMS, $database)
         return false;
     } else {
         return true;
+    }
+}
+
+function verfiyConnectionDb($con, $db)
+{
+    if (connectToDb($con, $db) === FALSE) {
+        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
+        die(messages()['error']['CreateDB'] . mySQLiError(''));
     }
 }
 

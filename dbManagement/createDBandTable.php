@@ -4,14 +4,10 @@ function createDBandTable($hn, $un, $pw, $db)
 {
     //1-Connect to the DBMS
     $con = connectToDBMS($hn, $un, $pw);
+    verfiyConnectionToDBMS($con);
 
-    //If connect to the DBMS failed, display try again and error, and stop
-    if ($con === false) {
-        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-        die(messages()['error']['ErrDBMS'] . mySQLiError(''));
-    }
+
     //If connect to the DBMS succeeds
-
     //If connection to the DB failed
     //2-Create the DB
     if (connectToDb($con, $db) === FALSE) {
@@ -20,10 +16,7 @@ function createDBandTable($hn, $un, $pw, $db)
             echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
             die(messages()['error']['CreateDB'] . mySQLiError(''));
         } else {
-            if (connectToDB($con, $db) === FALSE) {
-                echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-                die(messages()['error']['CreateDB'] . mySQLiError(''));
-            }
+            verfiyConnectionDb($con, $db);
         }
     }
 

@@ -13,19 +13,12 @@ function insertToTable($hn, $un, $pw, $db, $fname, $lname, $userName, $userPass)
 
     //1-Connect to the DBMS
     $con = connectToDBMS($hn, $un, $pw);
-
-    //If connect to the DBMS failed, display try again and error, and stop
-    if ($con === false) {
-        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-        die(messages()['error']['ErrDBMS'] . mySQLiError(''));
-    }
+    verfiyConnectionToDBMS($con);
 
     //If connect to the DBMS succeeds
     //2-Connect to the DB
-    if (connectToDb($con, $db) === FALSE) {
-        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-        die(messages()['error']['CreateDB'] . mySQLiError(''));
-    }
+    verfiyConnectionDb($con, $db);
+
 
     //If connect to the DB succeeds
     //3-Insert data to the Table 

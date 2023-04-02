@@ -5,21 +5,15 @@ function verfiyLogin($hn, $un, $pw, $db, $userName, $userPass)
         'userName' => $userName
     );
     shareFormData($collected);
+
     //1-Connect to the DBMS
     $con = connectToDBMS($hn, $un, $pw);
-
-    //If connect to the DBMS failed, display try again and error, and stop
-    if ($con === false) {
-        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-        die(messages()['error']['ErrDBMS'] . mySQLiError(''));
-    }
+    verfiyConnectionToDBMS($con);
 
     //If connect to the DBMS succeeds
     //2-Connect to the DB
-    if (connectToDb($con, $db) === FALSE) {
-        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-        die(messages()['error']['CreateDB'] . mySQLiError(''));
-    }
+    verfiyConnectionDb($con, $db);
+
 
     $registrationOrder = getRegistrationOrder($con);
 
