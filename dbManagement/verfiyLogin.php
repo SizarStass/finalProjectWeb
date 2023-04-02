@@ -1,5 +1,4 @@
 <?php
-include "functions.php"; //done
 function verfiyLogin($hn, $un, $pw, $db, $userName, $userPass)
 {
     $collected = array(

@@ -63,6 +63,7 @@
                 session_start();
                 $_SESSION['userName'] = $userName;
                 header("Location: ../games/game.php");
+                exit();
             } else {
                 echo "UserName and Password does not match";
             }
