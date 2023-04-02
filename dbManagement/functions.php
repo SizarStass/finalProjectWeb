@@ -121,6 +121,7 @@ function sqlAuthenicatorCommands()
     $sqlCode['descAuthenicator'] = "DESC Authenticator";
     $sqlCode['selectInAuthenicator'] = "SELECT * FROM Authenticator;";
     $sqlCode['selectPassCodeAndRegOrder'] = "SELECT * FROM Authenticator WHERE registrationOrder = '$registrationOrder' AND passCode = '$passCode';";
+    $sqlCode['updatePass'] = "UPDATE Authenticator SET passCode = '$passCode' WHERE registrationOrder = '$registrationOrder' ";
     return $sqlCode;
 }
 

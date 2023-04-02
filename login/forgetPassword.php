@@ -48,16 +48,26 @@
     </form>
     <!--Closing form tag-->
 
-</body>
 
-<?php
-if (isset($_POST['send'])) {
-    $userName = $_POST['userName'];
-    $password = $_POST['password'];
-    $cPassword = $_POST['cpassword'];
-    $fName = $_POST['fName'];
-    $lName = $_POST['lName'];
-}
-?>
+
+    <section class="Message">
+        <?php
+        if (isset($_POST['send'])) {
+            $userName = $_POST['userName'];
+            $userPass = $_POST['password'];
+            $cUserPass = $_POST['cpassword'];
+
+            require_once "../dbManagement/login_info.php"; //done
+            require_once "../dbManagement/updatePass.php";
+
+            if ($userPass != $cUserPass) {
+                echo "Password does not match the confirmation";
+            } else {
+                updatePass($hostname, $dbUsername, $password, $database, $userName, $userPass);
+            }
+        }
+        ?>
+    </section>
+</body>
 
 </html>
