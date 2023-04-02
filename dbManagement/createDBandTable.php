@@ -27,19 +27,25 @@ function createDBandTable($hn, $un, $pw, $db)
         }
     }
 
-    //If describe the Table failed
+    //If describe the Table Player failed
     //3-Create the Table
-    if (executeSqlQuery($con, sqlCommands()['descPlayer']) === false) {
+    if (executeSqlQuery($con, sqlPlayerCommands()['descPlayer']) === false) {
         //If create the Table failed, display try again and error, and stop
-        if (executeSqlQuery($con, sqlCommands()['createTabPlayer']) === false) {
-            echo " hey";
+        if (executeSqlQuery($con, sqlPlayerCommands()['createTabPlayer']) === false) {
             echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
             die(messages()['error']['CreateTab'] . mySQLiError(''));
         }
     }
 
-
-
+    //If describe the Table authenticator failed
+    //4-Create the Table
+    if (executeSqlQuery($con, sqlAuthenicatorCommands()['descAuthenicator']) === false) {
+        //If create the Table failed, display try again and error, and stop
+        if (executeSqlQuery($con, sqlAuthenicatorCommands()['createTabAuthenicator']) === false) {
+            echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
+            die(messages()['error']['CreateTab'] . mySQLiError(''));
+        }
+    }
 
     //4-Disconnect to the DBMS
     disconnectToDBMS($con);

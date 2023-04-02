@@ -70,17 +70,34 @@ function connectToDb($connectionDBMS, $database)
 function sqlCommands()
 {
     $sqlCode['createDB'] = "CREATE DATABASE KidsGame;";
+    return $sqlCode;
+}
+
+function sqlPlayerCommands()
+{
     $sqlCode['createTabPlayer'] = "CREATE TABLE Player( 
         fName VARCHAR(50) NOT NULL, 
         lName VARCHAR(50) NOT NULL, 
         userName VARCHAR(20) NOT NULL UNIQUE,
-        registrationTime DATETIME NOT NULL,
+        registrationTime DATETIME NOT NULL DEFAULT NOW(),
         id VARCHAR(200) GENERATED ALWAYS AS (CONCAT(UPPER(LEFT(fName,2)),UPPER(LEFT(lName,2)),UPPER(LEFT(userName,3)),CAST(registrationTime AS SIGNED))),
         registrationOrder INTEGER AUTO_INCREMENT,
         PRIMARY KEY (registrationOrder)
     )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;";
     $sqlCode['descPlayer'] = "DESC player";
-    $sqlCode['selectInPlayer'] = "SELECT * FROM player;";
+    $sqlCode['selectInPlayer'] = "SELECT * FROM Player;";
+    return $sqlCode;
+}
+
+function sqlAuthenicatorCommands()
+{
+    $sqlCode['createTabAuthenicator'] = "CREATE TABLE Authenticator(   
+        passCode VARCHAR(255) NOT NULL,
+        registrationOrder INTEGER, 
+        FOREIGN KEY (registrationOrder) REFERENCES player(registrationOrder)
+    )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; ";
+    $sqlCode['descAuthenicator'] = "DESC Authenticator";
+    $sqlCode['selectInAuthenicator'] = "SELECT * FROM Authenticator;";
     return $sqlCode;
 }
 
@@ -90,32 +107,49 @@ function sqlInsertCommand()
     $fn = $values['fname'];
     $ln = $values['lname'];
     $userName = $values['userName'];
+
     //Create queries
-    $sqlCode['InsertInPlayer'] = "INSERT INTO Player (fName, lName, userName) VALUES ('$fn', '$ln', '$userName');";
+    $sqlCode['InsertInPlayer'] = "INSERT INTO Player (fName, lName, userName) VALUES ('$fn', '$ln', '$userName');";;
+    //Return an array of queries
+    return $sqlCode;
+}
+
+function sqlInsertCommandAuthen()
+{
+    $values = shareFormData('');
+    $userPass = $values['userPass'];
+    $registrationOrder = $values['registrationOrder'];
+    //Create queries
+    $sqlCode['InsertInAuthenicator'] = "INSERT INTO Authenticator (passCode, registrationOrder) VALUES ('$userPass','$registrationOrder' );";
     //Return an array of queries
     return $sqlCode;
 }
 
 function executeSqlQuery($connection, $query)
 {
-
-    if (!$connection->query($query)) {
+    $invokeQuery = $connection->query($query);
+    if (!$invokeQuery) {
         mySQLiError($connection->error);
         return false;
     } else {
-        return true;
+        return $invokeQuery;
     }
-
-    // try {
-    //     //Execute the query
-    //     $invokeQuery = $connection->query($query);
-    // } catch (Exception $e) {
-    //     //If data insertion to the table failed save the system error message
-    //     mySQLiError($connection->error);
-    //     return FALSE;
-    // }
-    // return $invokeQuery;
 }
+
+function getRegistrationOrder($con)
+{
+    $values = shareFormData('');
+    $query = executeSqlQuery($con, sqlPlayerCommands()['selectInPlayer']);
+    $number_of_rows = $query->num_rows;
+    for ($j = 0; $j < $number_of_rows; ++$j) {
+        //Assign the records of each row to an associative array
+        $each_row = $query->fetch_array(MYSQLI_ASSOC); // TO CHECK
+        if ($each_row['userName'] == $values['userName']) {
+            return $each_row['registrationOrder'];
+        }
+    }
+}
+
 function displaySelectData($query)
 {
     //Calculate the number of rows available

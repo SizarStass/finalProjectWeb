@@ -5,7 +5,7 @@
 <head>
 
     <title>Game</title>
-    <link rel="stylesheet" href="../login/index.css">
+    <link rel="stylesheet" href="index.css">
 
 </head>
 
@@ -25,13 +25,13 @@
             <div>
                 <label for="password">Password:</label>
                 <br>
-                <input id="inputPass" type="text" name="password" placeholder="" required="required">
+                <input id="inputPass" type="password" name="password" placeholder="" required="required">
 
             </div>
             <div>
                 <label for="cpassword">Confirm Password:</label>
                 <br>
-                <input id="inputConfirmPass" type="text" name="cpassword" placeholder="" required="required">
+                <input id="inputConfirmPass" type="password" name="cpassword" placeholder="" required="required">
 
             </div>
             <div>
@@ -59,42 +59,50 @@
     </form>
     <!--Closing form tag-->
 
+
+
+    <?php
+
+    if (isset($_POST['send'])) {
+        $userName = $_POST['userName'];
+        $userpassword = $_POST['password'];
+        $cUserPassword = $_POST['cpassword'];
+        $fName = $_POST['fName'];
+        $lName = $_POST['lName'];
+
+        //Load files
+        require_once "../dbManagement/createDBandTable.php"; //done
+        require_once "../dbManagement/insertToTable.php"; //done
+        require_once "../dbManagement/login_info.php"; //done
+        // // require_once "../dbManagement/functions.php"; //done
+
+
+
+        createDBandTable(
+            $hostname,
+            $dbUsername,
+            $password,
+            $database,
+        );
+        if ($userpassword != $cUserPassword) {
+            echo "Password does not match the confirmation";
+        } else {
+            insertToTable(
+                $hostname,
+                $dbUsername,
+                $password,
+                $database,
+                $fName,
+                $lName,
+                $userName,
+                $userpassword
+            );
+
+            echo " <h3>User has been successfully created</h3>";
+        }
+    }
+    ?>
+
 </body>
-
-<?php
-
-if (isset($_POST['send'])) {
-    $userName = $_POST['userName'];
-    $password = $_POST['password'];
-    $cPassword = $_POST['cpassword'];
-    $fName = $_POST['fName'];
-    $lName = $_POST['lName'];
-
-    //Load files
-    require_once "../dbManagement/createDBandTable.php"; //done
-    require_once "../dbManagement/insertToTable.php"; //done
-    require_once "../dbManagement/login_info.php"; //done
-    // // require_once "../dbManagement/functions.php"; //done
-
-
-
-    createDBandTable(
-        $hostname,
-        $dbUsername,
-        $password,
-        $database,
-    );
-
-    insertToTable(
-        $hostname,
-        $dbUsername,
-        $password,
-        $database,
-        $fName,
-        $lName,
-        $userName
-    );
-}
-?>
 
 </html>

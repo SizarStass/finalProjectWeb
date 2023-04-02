@@ -1,12 +1,14 @@
 <?php
-function insertToTable($hn, $un, $pw, $db, $fname, $lname, $userName)
+function insertToTable($hn, $un, $pw, $db, $fname, $lname, $userName, $userPass)
 {
     //Make the form data available for the other functions 
     $collected = array(
         'fname' => $fname,
         'lname' => $lname,
-        'userName' => $userName
+        'userName' => $userName,
+        'userPass' => $userPass,
     );
+
     shareFormData($collected);
 
     //1-Connect to the DBMS
@@ -28,7 +30,17 @@ function insertToTable($hn, $un, $pw, $db, $fname, $lname, $userName)
     //If connect to the DB succeeds
     //3-Insert data to the Table 
     //If insert data to the Table failed, display try again and error, and stop
+
     if (executeSqlQuery($con, sqlInsertCommand()['InsertInPlayer']) === FALSE) {
+        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
+        die(messages()['error']['InsertToTab'] . mySQLiError(''));
+    }
+
+    $collected['registrationOrder'] = getRegistrationOrder($con);
+    shareFormData($collected);
+
+
+    if (executeSqlQuery($con, sqlInsertCommandAuthen()['InsertInAuthenicator']) === FALSE) {
         echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
         die(messages()['error']['InsertToTab'] . mySQLiError(''));
     }
