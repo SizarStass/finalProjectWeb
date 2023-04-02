@@ -34,7 +34,6 @@
             <br>
             <input id="submitbutton1" type="submit" name="send" value="Login" />
             <?php
-            validateUserPass();
             ?>
 
             <div>
@@ -46,13 +45,27 @@
     </form>
     <!--Closing form tag-->
     <?php
-    function validateUserPass()
-    {
-        if (isset($_POST['send'])) {
-            $userName = $_POST['userName'];
-            $password = $_POST['password'];
+
+    if (isset($_POST['send'])) {
+        $userName = $_POST['userName'];
+        $userpassword = $_POST['password'];
+
+        //Load files
+        require_once "../dbManagement/createDBandTable.php"; //done
+        require_once "../dbManagement/insertToTable.php"; //done
+        require_once "../dbManagement/login_info.php"; //done
+        require_once "../dbManagement/verfiyLogin.php"; //done
+
+
+        if (verfiyLogin($hostname, $dbUsername, $password, $database, $userName, $userpassword) == true) {
+            session_start();
+            $_SESSION['userName'] = $userName;
+            header("Location: ../games/game.php");
+        } else {
+            echo "UserName and Password does not match";
         }
     }
+
 
     ?>
 

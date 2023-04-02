@@ -91,6 +91,11 @@ function sqlPlayerCommands()
 
 function sqlAuthenicatorCommands()
 {
+    //For verfiy login
+    $values = shareFormData('');
+    $registrationOrder = $values['registrationOrder'];
+    $passCode = $values['userPass'];
+
     $sqlCode['createTabAuthenicator'] = "CREATE TABLE Authenticator(   
         passCode VARCHAR(255) NOT NULL,
         registrationOrder INTEGER, 
@@ -98,6 +103,7 @@ function sqlAuthenicatorCommands()
     )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; ";
     $sqlCode['descAuthenicator'] = "DESC Authenticator";
     $sqlCode['selectInAuthenicator'] = "SELECT * FROM Authenticator;";
+    $sqlCode['selectPassCodeAndRegOrder'] = "SELECT * FROM Authenticator WHERE registrationOrder = '$registrationOrder' AND passCode = '$passCode';";
     return $sqlCode;
 }
 
