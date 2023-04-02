@@ -60,49 +60,49 @@
     <!--Closing form tag-->
 
 
+    <section class="Message">
+        <?php
 
-    <?php
+        if (isset($_POST['send'])) {
+            $userName = $_POST['userName'];
+            $userpassword = $_POST['password'];
+            $cUserPassword = $_POST['cpassword'];
+            $fName = $_POST['fName'];
+            $lName = $_POST['lName'];
 
-    if (isset($_POST['send'])) {
-        $userName = $_POST['userName'];
-        $userpassword = $_POST['password'];
-        $cUserPassword = $_POST['cpassword'];
-        $fName = $_POST['fName'];
-        $lName = $_POST['lName'];
-
-        //Load files
-        require_once "../dbManagement/createDBandTable.php"; //done
-        require_once "../dbManagement/insertToTable.php"; //done
-        require_once "../dbManagement/login_info.php"; //done
-        // // require_once "../dbManagement/functions.php"; //done
+            //Load files
+            require_once "../dbManagement/createDBandTable.php"; //done
+            require_once "../dbManagement/insertToTable.php"; //done
+            require_once "../dbManagement/login_info.php"; //done
+            // // require_once "../dbManagement/functions.php"; //done
 
 
 
-        createDBandTable(
-            $hostname,
-            $dbUsername,
-            $password,
-            $database,
-        );
-        if ($userpassword != $cUserPassword) {
-            echo "Password does not match the confirmation";
-        } else {
-            insertToTable(
+            createDBandTable(
                 $hostname,
                 $dbUsername,
                 $password,
                 $database,
-                $fName,
-                $lName,
-                $userName,
-                $userpassword
             );
+            if ($userpassword != $cUserPassword) {
+                echo "Password does not match the confirmation";
+            } else {
+                insertToTable(
+                    $hostname,
+                    $dbUsername,
+                    $password,
+                    $database,
+                    $fName,
+                    $lName,
+                    $userName,
+                    $userpassword
+                );
 
-            echo " <h3>User has been successfully created</h3>";
+                echo " <h3>User has been successfully created</h3>";
+            }
         }
-    }
-    ?>
-
+        ?>
+    </section>
 </body>
 
 </html>

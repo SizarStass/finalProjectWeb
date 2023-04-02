@@ -20,3 +20,13 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+.Message {
+    margin-top: 1cm;
+    border: 1px solid;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
