@@ -1,0 +1,76 @@
+nav {
+    background-color: #333;
+    height: 50px;
+    position: relative;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul:first-child {
+    margin-right: auto;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+#logout {
+    position: absolute;
+    padding: 10px;
+    top: 0;
+    right: 0;
+    margin: 0;
+}
+
+* {
+    font-family: 'poppins', sans-serif;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    border: 1px solid;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Message {
+    margin-top: 1cm;
+    border: 1px solid;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

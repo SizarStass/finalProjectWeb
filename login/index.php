@@ -25,7 +25,7 @@
             <div>
                 <label for="password">Password:</label>
                 <br>
-                <input id="inputIname" type="text" name="password" placeholder="" required="required">
+                <input id="inputIname" type="password" name="password" placeholder="" required="required">
 
             </div>
             <div>
