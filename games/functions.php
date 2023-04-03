@@ -35,17 +35,31 @@ function generateRandomLetters()
 
 function checkLettersAccOrder($input, $randomLetters)
 {
-    $randomLettersArr = explode(',', $randomLetters);
-    sort($randomLettersArr);
-    $sortedRandLetters = implode("", $randomLettersArr);
-    $flag = true;
-    echo $sortedRandLetters;
     $letters = explode(',', $input);
+    $strLetters = implode('', $letters);
 
-    for ($i = 0; $i < 5; $i++) {
-        if ($letters[$i] != $sortedRandLetters[$i]) {
-            $flag = false;
+    echo $strLetters;
+    echo "<br>";
+    echo $randomLetters;
+    $strLetters = strtoupper($strLetters);
+    for ($i = 0; $i < strlen($strLetters); $i++) {
+        if ($strLetters[$i] !== $randomLetters[$i]) {
+            return false;
         }
     }
-    return $flag;
+    return true;
 }
+
+
+
+// echo "<br>";
+// echo $letters[$i] . "  =   " . $randomLettersArr[$i];
+// echo "<br>";
+// for ($i = 0; $i < count($randomLettersArr); $i++) {
+//     echo $randomLettersArr[$i] . " ";
+// }
+// echo "<br>";
+// echo "<br>";
+// for ($i = 0; $i < count($letters); $i++) {
+//     echo $letters[$i] . " ";
+// }

@@ -30,10 +30,10 @@
             ?></p>
         <br>
         <input id="inputIname" type="text" name="letters" placeholder="A,B,C,..." required="required">
-        <input type="hidden" name="randNum" value="<?php echo $randLetters; ?>">
+        <input type="hidden" name="randNum" value="<?php echo $sortedRandLetters; ?> ">
         <br>
         <br>
-        <button id="submitbutton1">Send</button>
+        <button type="submit" id="submitbutton1">Send</button>
         <!--Submit button to send form data-->
 
 
