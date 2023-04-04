@@ -5,7 +5,7 @@ function verfiyLogin($hn, $un, $pw, $db, $userName, $userPass)
         'userName' => $userName
     );
     shareFormData($collected);
-
+    //try to edit
     //1-Connect to the DBMS
     $con = connectToDBMS($hn, $un, $pw);
     verfiyConnectionToDBMS($con);
