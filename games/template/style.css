@@ -18,6 +18,8 @@ nav ul:first-child {
 
 nav li {
     margin: 0 10px;
+    color: #fff;
+    font-size: 18px;
 }
 
 nav a {

@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php
+session_start();
+unset($_SESSION['userName']);
+unset($_SESSION['livesUsed']);
+unset($_SESSION['MaxLives']);
+session_destroy();
+?>
 
 <html>
 
@@ -47,7 +54,6 @@
     <section class="Message">
         <!--Closing form tag-->
         <?php
-
         if (isset($_POST['send'])) {
             $userName = $_POST['userName'];
             $userpassword = $_POST['password'];
@@ -62,8 +68,9 @@
             if (verfiyLogin($hostname, $dbUsername, $password, $database, $userName, $userpassword) == true) {
                 session_start();
                 $_SESSION['userName'] = $userName;
+                $_SESSION['livesUsed'] = 0;
+                $_SESSION['MaxLives'] = 6;
                 header("Location: ../games/game.php");
-                exit();
             } else {
                 echo "UserName and Password does not match";
             }

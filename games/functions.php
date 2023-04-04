@@ -38,9 +38,6 @@ function checkLettersAccOrder($input, $randomLetters)
     $letters = explode(',', $input);
     $strLetters = implode('', $letters);
 
-    echo $strLetters;
-    echo "<br>";
-    echo $randomLetters;
     $strLetters = strtoupper($strLetters);
     for ($i = 0; $i < strlen($strLetters); $i++) {
         if ($strLetters[$i] !== $randomLetters[$i]) {
@@ -49,17 +46,3 @@ function checkLettersAccOrder($input, $randomLetters)
     }
     return true;
 }
-
-
-
-// echo "<br>";
-// echo $letters[$i] . "  =   " . $randomLettersArr[$i];
-// echo "<br>";
-// for ($i = 0; $i < count($randomLettersArr); $i++) {
-//     echo $randomLettersArr[$i] . " ";
-// }
-// echo "<br>";
-// echo "<br>";
-// for ($i = 0; $i < count($letters); $i++) {
-//     echo $letters[$i] . " ";
-// }

@@ -40,6 +40,17 @@ function createDBandTable($hn, $un, $pw, $db)
         }
     }
 
+    //If describe the Table Scorefailed
+    //4-Create the Table
+    if (executeSqlQuery($con, sqlScoreCommands()['descScore']) === false) {
+        //If create the Table failed, display try again and error, and stop
+        if (executeSqlQuery($con, sqlScoreCommands()['createTabScore']) === false) {
+            echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
+            die(messages()['error']['CreateTab'] . mySQLiError(''));
+        }
+    }
+
+
     //4-Disconnect to the DBMS
     disconnectToDBMS($con);
 }

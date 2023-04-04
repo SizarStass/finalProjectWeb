@@ -125,6 +125,35 @@ function sqlAuthenicatorCommands()
     return $sqlCode;
 }
 
+
+function sqlScoreCommands()
+{
+    $sqlCode['createTabScore'] = "CREATE TABLE Score( 
+        scoreTime DATETIME NOT NULL DEFAULT NOW(), 
+        result ENUM('success', 'failure', 'incomplete'),
+        livesUsed INTEGER NOT NULL,
+        registrationOrder INTEGER, 
+        FOREIGN KEY (registrationOrder) REFERENCES player(registrationOrder)
+    )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; ";
+    $sqlCode['descScore'] = "DESC Score";
+    $sqlCode['selectInScore'] = "SELECT * FROM Score;";
+
+    return $sqlCode;
+}
+
+function sqlInsertCommandScore()
+{
+    $values = shareFormData('');
+    $result = $values['result'];
+    $livesUsed = $values['livesUsed'];
+    $registrationOrder = $values['registrationOrder'];
+
+    //Create queries
+    $sqlCode['InsertInScore'] = "INSERT INTO Score (result, livesUsed, registrationOrder) VALUES ('$result', '$livesUsed', '$registrationOrder');";;
+    //Return an array of queries
+    return $sqlCode;
+}
+
 function sqlInsertCommand()
 {
     $values = shareFormData('');

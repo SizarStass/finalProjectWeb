@@ -17,7 +17,7 @@
 
     <form id="form1" method="post" action="">
         <h1>Game lvl 1</h1>
-        <label for="grades">Please enter all the letters in alphabetical order and separate them by a comma:</label>
+        <label for="letters">Please enter all the letters in alphabetical order and separate them by a comma:</label>
 
 
         <p> <?php echo $randLetters;
@@ -26,7 +26,6 @@
             sort($randomLettersArr);
             $sortedRandLetters = implode("", $randomLettersArr);
             $flag = true;
-            echo $sortedRandLetters;
             ?></p>
         <br>
         <input id="inputIname" type="text" name="letters" placeholder="A,B,C,..." required="required">
