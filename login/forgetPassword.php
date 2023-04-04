@@ -25,13 +25,13 @@
             <div>
                 <label for="password">Password:</label>
                 <br>
-                <input id="inputPass" type="text" name="password" placeholder="" required="required">
+                <input id="inputPass" type="password" name="password" placeholder="" required="required">
 
             </div>
             <div>
                 <label for="cpassword">Confirm Password:</label>
                 <br>
-                <input id="inputConfirmPass" type="text" name="cpassword" placeholder="" required="required">
+                <input id="inputConfirmPass" type="password" name="cpassword" placeholder="" required="required">
 
             </div>
 
