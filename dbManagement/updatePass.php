@@ -17,18 +17,23 @@ function updatePass($hn, $un, $pw, $db, $userName, $userPass)
 
 
     $registrationOrder = getRegistrationOrder($con);
-
-
     $collected = array(
         'registrationOrder' => $registrationOrder,
         'userPass' => $userPass
     );
     shareFormData($collected);
 
-    if (executeSqlQuery($con, sqlAuthenicatorCommands()['updatePass']) === FALSE) {
-        echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
-        die(messages()['error']['InsertToTab'] . mySQLiError(''));
-    }
+    $query = executeSqlQuery($con, sqlAuthenicatorCommands()['selectRegOrder']);
+    $number_of_rows = $query->num_rows;
 
-    echo "Password has been successfully updated ";
+    if ($number_of_rows < 1) {
+        echo "There is no Player with this username";
+    } else {
+        if (executeSqlQuery($con, sqlAuthenicatorCommands()['updatePass']) === FALSE) {
+            echo "<a href=\"index.php\"><input type=\"submit\" value=\"Try again!\"></a>";
+            die(messages()['error']['InsertToTab'] . mySQLiError(''));
+        }
+
+        echo "Password has been successfully updated ";
+    }
 }

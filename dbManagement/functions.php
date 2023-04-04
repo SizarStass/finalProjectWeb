@@ -121,6 +121,7 @@ function sqlAuthenicatorCommands()
     $sqlCode['descAuthenicator'] = "DESC Authenticator";
     $sqlCode['selectInAuthenicator'] = "SELECT * FROM Authenticator;";
     $sqlCode['selectPassCodeAndRegOrder'] = "SELECT * FROM Authenticator WHERE registrationOrder = '$registrationOrder' AND passCode = '$passCode';";
+    $sqlCode['selectRegOrder'] = "SELECT * FROM Authenticator WHERE registrationOrder = '$registrationOrder';";
     $sqlCode['updatePass'] = "UPDATE Authenticator SET passCode = '$passCode' WHERE registrationOrder = '$registrationOrder' ";
     return $sqlCode;
 }
@@ -203,24 +204,24 @@ function getRegistrationOrder($con)
     }
 }
 
-function displaySelectData($query)
-{
-    //Calculate the number of rows available
-    $number_of_rows = $query->num_rows;
-    //Use a loop to display the rows one by one
-    echo "<table>";
-    echo "<tr><td>ID</td><td>First Name</td><td>Last Name</td><td>UserName</td></tr>";
+// function displaySelectData($query)
+// {
+//     //Calculate the number of rows available
+//     $number_of_rows = $query->num_rows;
+//     //Use a loop to display the rows one by one
+//     echo "<table>";
+//     echo "<tr><td>ID</td><td>First Name</td><td>Last Name</td><td>UserName</td></tr>";
 
-    for ($j = 0; $j < $number_of_rows; ++$j) {
-        echo "<tr>";
-        //Assign the records of each row to an associative array
-        $each_row = $query->fetch_array(MYSQLI_ASSOC); // TO CHECK
-        //Display each the record corresponding to each column
-        foreach ($each_row as $item)
-            echo "<td>" . $item . "</td>";
-        echo "</tr>";
-    }
-}
+//     for ($j = 0; $j < $number_of_rows; ++$j) {
+//         echo "<tr>";
+//         //Assign the records of each row to an associative array
+//         $each_row = $query->fetch_array(MYSQLI_ASSOC); // TO CHECK
+//         //Display each the record corresponding to each column
+//         foreach ($each_row as $item)
+//             echo "<td>" . $item . "</td>";
+//         echo "</tr>";
+//     }
+// }
 
 
 function disconnectToDBMS($connection)

@@ -14,7 +14,7 @@
 
     <form id="form1" method="post" action="">
         <h1>Game lvl 2</h1>
-        <label for="">The game has not been yet developed by my beautiful team :)</label>
+        <label for="">The game has not been developed yet by my beautiful team :)</label>
 
 
 
