@@ -26,6 +26,7 @@
             sort($randomLettersArr);
             $sortedRandLetters = implode("", $randomLettersArr);
             $flag = true;
+            echo $sortedRandLetters;
             ?></p>
         <br>
         <input id="inputIname" type="text" name="letters" placeholder="A,B,C,..." required="required">

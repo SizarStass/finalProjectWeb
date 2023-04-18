@@ -10,20 +10,24 @@ if (isset($_POST['letters'])) {
     $userInput = $_POST['letters'];
     $randLetter = $_POST['randNum'];
     $result = "incomplete";
-    if (checkLettersOrder($userInput, $randLetter)) {
+    if (checkLettersOrder($userInput, $randLetter) == TRUE) {
         echo "<p>Good Job</p>";
         $result = "success";
         insertToScore($hostname, $dbUsername, $password, $database, $userName, $result, $_SESSION['livesUsed']);
-        echo "<button onclick=\"location.href='game2.php'\">go to Game lvl 2 -></button>";
+        echo "<button onclick=\"location.href='game3.php'\">go to Game lvl 3 -></button>";
     } else {
         echo "<p>You lost,</p>";
         $_SESSION['livesUsed'] += 1;
+
+        if ($_SESSION['livesUsed'] < $MaxLives) {
+            echo "<button onclick=\"location.reload();\">Try again :(</button>";
+        }
         if ($_SESSION['livesUsed'] == $MaxLives) {
             $result = "failure";
             insertToScore($hostname, $dbUsername, $password, $database, $userName, $result, $_SESSION['livesUsed']);
             $_SESSION['livesUsed'] = 0;
             echo "<p>Game failed,</p>";
+            echo "<a href=\"game.php\"><button>Try again FROM LVL1 :(</button></a>";
         }
-        echo "<button onclick=\"location.reload();\">Try again :(</button>";
     }
 }

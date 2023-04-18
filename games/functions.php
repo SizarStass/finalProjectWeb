@@ -33,8 +33,11 @@ function generateRandomLetters()
 }
 
 
-function checkLettersAccOrder($input, $randomLetters)
+function checkLettersOrder($input, $randomLetters)
 {
+    if ($input == "") {
+        return false;
+    }
     $letters = explode(',', $input);
     $strLetters = implode('', $letters);
 
