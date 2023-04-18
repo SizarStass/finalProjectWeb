@@ -26,6 +26,7 @@
             sort($randomLettersArr);
             $sortedRandLetters = implode("", $randomLettersArr);
             $flag = true;
+            echo "Answer: ";
             echo $sortedRandLetters;
             ?></p>
         <br>

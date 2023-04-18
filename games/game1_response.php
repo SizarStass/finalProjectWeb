@@ -13,7 +13,7 @@ if (isset($_POST['letters'])) {
     if (checkLettersOrder($userInput, $randLetter)) {
         echo "<p>Good Job</p>";
         $result = "success";
-        insertToScore($hostname, $dbUsername, $password, $database, $userName, $result, $_SESSION['livesUsed']);
+        // insertToScore($hostname, $dbUsername, $password, $database, $userName, $result, $_SESSION['livesUsed']);
         echo "<button onclick=\"location.href='game2.php'\">go to Game lvl 2 -></button>";
     } else {
         echo "<p>You lost,</p>";

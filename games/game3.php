@@ -16,8 +16,8 @@
 
     <form id="form1" method="post" action="">
         <h1>Game lvl 3</h1>
-        <label for="letters"></label>
-
+        <label for="letters"> Game has not been developed :( </label>
+        <H3>Congratulations, You finished the game</H3>
 
     </form>
 
